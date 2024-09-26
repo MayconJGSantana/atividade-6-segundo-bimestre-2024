@@ -1,15 +1,18 @@
 programa
 {
-	
+	inclua biblioteca Texto
+
 	funcao inicio()
 	{
 		inteiro numero
 		inteiro maior_numero = 0
 		inteiro menor_numero = 0
 		inteiro i
-		inteiro soma	
-		
-		para (i = 1; i <= 5; i++) {
+		inteiro soma = 0
+		inteiro quantidade_vezes
+		cadeia deseja_continuar 
+
+		enquanto (verdadeiro) {
 			escreva("Blablabla: ")
 			leia(numero)
 			se (i == 1) {
@@ -21,6 +24,24 @@ programa
 			}
 			senao {
 				menor_numero = numero
+			}
+			soma += numero
+			enquanto (verdadeiro) {
+				pergunte("Deseja continuar o programa [sim/nao]? ")
+				leia(deseja_continuar)
+				deseja_continuar  = Texto.caixa_baixa(deseja_continuar)
+				se (deseja_continuar != "nao" e deseja_continuar != "sim" e deseja_continuar != "não") {
+					escreva("Valor inválido, tente novamente!\n")
+				}
+				senao {
+					pare
+				}
+			}
+			se (deseja_continuar == "sim") {
+				limpa()
+			}
+			senao {
+				pare
 			}
 		}
 		escreva(maior_numero, " - ", menor_numero, " - ", soma)
