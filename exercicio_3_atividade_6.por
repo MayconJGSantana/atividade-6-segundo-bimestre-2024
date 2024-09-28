@@ -15,10 +15,10 @@ programa
 				maior_numero = numero
 				menor_numero = numero
 			}
-			senao se (numero > maior_numero) {
+			se (numero > maior_numero) {
 				maior_numero = numero
 			}
-			senao {
+			senao se (numero < menor_numero) {
 				menor_numero = numero
 			}
 		}
