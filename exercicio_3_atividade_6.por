@@ -24,6 +24,7 @@ programa
 		escreva("...")
 		Util.aguarde(tempo)
 	}
+
 	funcao inicio()
 	{
 		inteiro numero
