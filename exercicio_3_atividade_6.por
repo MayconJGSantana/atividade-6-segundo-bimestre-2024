@@ -1,28 +1,50 @@
 programa
 {
+	inclua biblioteca Texto
+	inclua biblioteca Util
+
+	funcao vazio espacos(inteiro quantidade_espacos) {
+		para (inteiro i = 0; i < quantidade_espacos; i++) {
+			escreva("=")
+		}
+		escreva("\n")
+	}
 	
+	funcao vazio cabecalho(inteiro quantidade_espacos, cadeia enunciado) {
+		inteiro teste = 0
+		espacos(quantidade_espacos)
+		para (inteiro i = 0; i < quantidade_espacos / 2 - Texto.numero_caracteres(enunciado) / 2; i++) {
+			escreva(" ")
+		}
+		escreva(enunciado, "\n")
+		espacos(quantidade_espacos)
+	}
+	
+	funcao vazio aguarde(inteiro tempo) {
+		escreva("...")
+		Util.aguarde(tempo)
+	}
 	funcao inicio()
 	{
 		inteiro numero
 		inteiro maior_numero = 0
-		inteiro menor_numero = 0
 		inteiro i
+
+		cabecalho(40, "Exercício 3")
+
+		escreva("-> Entre com o número: ")
+		leia(numero)
+		maior_numero = numero
 		
-		para (i = 1; i <= 5; i++) {
-			escreva("Blablabla: ")
+		para (i = 1; i <= 4; i++) {
+			escreva("-> Entre com o número: ")
 			leia(numero)
-			se (i == 1) {
-				maior_numero = numero
-				menor_numero = numero
-			}
 			se (numero > maior_numero) {
 				maior_numero = numero
 			}
-			senao se (numero < menor_numero) {
-				menor_numero = numero
-			}
 		}
-		escreva(maior_numero, " - ", menor_numero)
+		aguarde(2000)
+		escreva("\n", "O maior número encontrado foi: ", maior_numero)
 	}
 }
 /* $$$ Portugol Studio $$$ 
