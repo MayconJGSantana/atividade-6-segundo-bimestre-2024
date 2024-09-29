@@ -4,20 +4,31 @@ programa
 	inclua biblioteca Util
 	
 	funcao vazio espacos(inteiro quantidade_espacos) {
+		// vai ser escrito "=" quantidade_espacos vezes
 		para (inteiro i = 0; i < quantidade_espacos; i++) {
 			escreva("=")
 		}
-		escreva("\n")
+		
+		pular_linha()
 	}
 	
 	funcao vazio cabecalho(inteiro quantidade_espacos, cadeia enunciado) {
 		inteiro teste = 0
 		espacos(quantidade_espacos)
+
+		// vai colocar espaço até que quando escrito o enunciado fique no meio
 		para (inteiro i = 0; i < quantidade_espacos / 2 - Texto.numero_caracteres(enunciado) / 2; i++) {
 			escreva(" ")
 		}
-		escreva(enunciado, "\n")
+		escreva(enunciado)
+		
+		pular_linha()
+		
 		espacos(quantidade_espacos)
+	}
+
+	funcao vazio pular_linha() {
+		escreva("\n")
 	}
 	
 	funcao vazio pergunte(cadeia enunciado) {
@@ -25,8 +36,27 @@ programa
 	}
 	
 	funcao vazio aguarde(inteiro tempo) {
-		escreva("\n...\n")
+		escreva("...")
 		Util.aguarde(tempo)
+	}
+
+	funcao logico escolhe(cadeia enunciado) {
+		cadeia deseja_continuar = ""
+		escreva("-> ", enunciado, " [sim/nao]? ")
+		leia(deseja_continuar)
+		deseja_continuar  = Texto.caixa_baixa(deseja_continuar)
+
+		se (deseja_continuar == "sim") {
+			retorne verdadeiro
+		}
+		senao se (deseja_continuar == "nao" ou deseja_continuar == "não") {
+			retorne falso
+		}
+		senao {
+			escreva("Valor inválido, tente novamente!")
+			pular_linha()
+			retorne escolhe(enunciado)
+		}
 	}
 	
 	funcao inicio()
@@ -36,44 +66,39 @@ programa
 		inteiro menor_numero = 0
 		inteiro soma = 0
 		inteiro quantidade_vezes
+		logico continuar
 
-		// caprichos
-		cadeia deseja_continuar = ""
+		cabecalho(40, "Exercício 8")
 		
-		escreva("Entre com um número: ")
+		escreva("-> Entre com um número: ")
 		leia(numero)
 		maior_numero = numero
 		menor_numero = numero
+		soma = numero
 
 		enquanto (verdadeiro) {
-			escreva("Entre com um número: ")
+			escreva("-> Entre com um número: ")
 			leia(numero)
+			soma += numero
+			
 			se (numero > maior_numero) {
 				maior_numero = numero
 			}
-			senao {
+			senao se (numero < menor_numero) {
 				menor_numero = numero
 			}
-			soma += numero
-			enquanto (verdadeiro) {
-				pergunte("Desejas continuar o programa [sim/nao]? ")
-				leia(deseja_continuar)
-				deseja_continuar  = Texto.caixa_baixa(deseja_continuar)
-				se (deseja_continuar != "nao" e deseja_continuar != "sim" e deseja_continuar != "não") {
-					escreva("Valor inválido, tente novamente!\n")
-				}
-				senao {
-					pare
-				}
-			}
-			se (deseja_continuar == "sim") {
-				limpa()
-			}
-			senao {
+
+			continuar = escolhe("Desejas continuar a escrever")
+			se (nao continuar) {
 				pare
 			}
 		}
-		escreva(maior_numero, " - ", menor_numero, " - ", soma)
+
+		aguarde(2000)
+		pular_linha()
+
+		// resultado
+		escreva("O maior número é ", maior_numero, " e o menor é ", menor_numero, "; já a soma é ", soma)
 	}
 }
 
