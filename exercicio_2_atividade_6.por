@@ -46,6 +46,7 @@ programa
 		real quantidade_numeros = 0.0
 
 		cabecalho(40, "Exercício 2")
+
 		para (i = 1; i <= 5; i++) {
 			escreva("-> Entre com o número: ")
 			leia(numeros)
