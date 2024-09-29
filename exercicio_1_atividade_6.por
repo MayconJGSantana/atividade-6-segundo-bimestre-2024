@@ -32,58 +32,123 @@ programa
 	
 	funcao logico escolhe(cadeia enunciado) {
 		cadeia deseja_continuar = ""
-			escreva("-> ", enunciado, " [sim/nao]? ")
-			leia(deseja_continuar)
-			deseja_continuar  = Texto.caixa_baixa(deseja_continuar)
-			
-			se (deseja_continuar == "sim") {
-				retorne verdadeiro
-			}
-			senao se (deseja_continuar == "nao" ou deseja_continuar == "não") {
-				retorne falso
-			}
-			senao {
-				escreva("Valor inválido, tente novamente!")
-				pular_linha()
-				retorne escolhe(enunciado)
-			}
+		escreva("-> ", enunciado, " [sim/nao]? ")
+		leia(deseja_continuar)
+		deseja_continuar  = Texto.caixa_baixa(deseja_continuar)
+
+		se (deseja_continuar == "sim") {
+			retorne verdadeiro
+		}
+		senao se (deseja_continuar == "nao" ou deseja_continuar == "não") {
+			retorne falso
+		}
+		senao {
+			escreva("Valor inválido, tente novamente!")
+			pular_linha()
+			retorne escolhe(enunciado)
+		}
 	}
 
-	funcao inteiro tempo_chegada(real cidadaos_a, real taxa_natalidade_a, real cidadaos_b, real taxa_natalidade_b, logico mostrar_cidadaos) {
+	funcao vazio anos_chegada_habitantes(real cidadaos_a, real crescimento_vegetativo_a, real cidadaos_b, real crescimento_vegetativo_b, logico mostrar_cidadaos) {
 		inteiro quantidade_anos = 0
-		enquanto (cidadaos_a < cidadaos_b) {
-			quantidade_anos++
-			cidadaos_a = cidadaos_a * (taxa_natalidade_a / 100 + 1)
-			cidadaos_b = cidadaos_b * (taxa_natalidade_b / 100 + 1)
-			se (mostrar_cidadaos) {
-				escreva(quantidade_anos + "° ano", " - ", "Cidadãos da A: " + cidadaos_a, " - ", "Cidadãos da B: " + cidadaos_b)
-				pular_linha()
+		se (crescimento_vegetativo_a > crescimento_vegetativo_b) {
+			enquanto (cidadaos_a <= cidadaos_b) {
+				quantidade_anos++
+				cidadaos_a = cidadaos_a * (crescimento_vegetativo_a / 100 + 1)
+				cidadaos_b = cidadaos_b * (crescimento_vegetativo_b / 100 + 1)
+				se (mostrar_cidadaos) {
+					escreva(quantidade_anos + "° ano", " - ", "Cidadãos da A: " + cidadaos_a, " - ", "Cidadãos da B: " + cidadaos_b)
+					pular_linha()
+				}
 			}
+			aguarde(2000)
+			pular_linha()
+			escreva("Para a cidade A ultrapassar, em habitantes, a cidade B, será necessário " + quantidade_anos + " anos.")
 		}
-		retorne quantidade_anos
+		senao se (crescimento_vegetativo_b > crescimento_vegetativo_a) {
+			enquanto (cidadaos_a >= cidadaos_b) {
+				quantidade_anos++
+				cidadaos_a = cidadaos_a * (crescimento_vegetativo_a / 100 + 1)
+				cidadaos_b = cidadaos_b * (crescimento_vegetativo_b / 100 + 1)
+				se (mostrar_cidadaos) {
+					escreva(quantidade_anos + "° ano", " - ", "Cidadãos da A: " + cidadaos_a, " - ", "Cidadãos da B: " + cidadaos_b)
+					pular_linha()
+				}
+			}
+			aguarde(2000)
+			pular_linha()
+			escreva("Para a cidade B ultrapassar, em habitantes, a cidade A, será necessário " + quantidade_anos + " anos.")
+		}
+		senao {
+			escreva("O crescimento de ambas cidades é proporcional, portanto, nunca uma passará a outra em habitantes.")
+		}
 	}
+	
 	funcao inicio()
 	{
 		real cidadaos_a = 80000.0
-		real taxa_natalidade_a = 3.0
+		real crescimento_vegetativo_a = 3.0
 		
 		real cidadaos_b = 200000.0
-		real taxa_natalidade_b = 1.5
-
-		inteiro quantidade_anos = 0
+		real crescimento_vegetativo_b = 1.5
 
 		// caprichos
 		logico aparecer_cidadaos
+		logico deseja_continuar
 
-		// inicio do programa
+
+
+		// exercício
 		cabecalho(40, "Exercício 4")
-		aparecer_cidadaos = escolhe("Desejas que apareça os cidadãos durantes os anos")
-		quantidade_anos = tempo_chegada(cidadaos_a, taxa_natalidade_a, cidadaos_b, taxa_natalidade_b, aparecer_cidadaos)
+
+		// entrada de variáveis
+		aparecer_cidadaos = escolhe("Desejas que apareça a quantidade de cidadãos em ambas cidades durantes os anos")
+
+		// resultado
+		anos_chegada_habitantes(cidadaos_a, crescimento_vegetativo_a, cidadaos_b, crescimento_vegetativo_b, aparecer_cidadaos)
+
+
+
+		// caprichos do programa
+		enquanto (verdadeiro) {
+			
+			// entrada de variáveis
+			pular_linha()
+			aguarde(5000)
+			pular_linha()
+			
+			deseja_continuar = escolhe("Desejas fazer um novo experimento")
+			
+			se (deseja_continuar) {
+				limpa()
+
+				// entrada de variáveis
+				escreva("-> Entre com a quantidade de cidadãos na cidade A: ")
+				leia(cidadaos_a)
+				escreva("-> Entre com a taxa de aumento dos cidadãos da A: ")
+				leia(crescimento_vegetativo_a)
+				escreva("-> Entre com a quantidade de cidadãos na cidade B: ")
+				leia(cidadaos_b)
+				escreva("-> Entre com a taxa de aumento dos cidadãos da B: ")
+				leia(crescimento_vegetativo_b)
+
+				aguarde(1000)
+				pular_linha()
+				
+				aparecer_cidadaos = escolhe("Desejas que apareça a quantidade de cidadãos em ambas cidades durantes os anos")
+
+				// resultado
+				aguarde(1000)
+				pular_linha()
+				
+				anos_chegada_habitantes(cidadaos_a, crescimento_vegetativo_a, cidadaos_b, crescimento_vegetativo_b, aparecer_cidadaos)
+				
+			}
+			senao {
+				pare
+			}
+		}
 		
-		aguarde(2000)
-		pular_linha()
-		
-		escreva("Para a cidade A de " + cidadaos_a + " habitantes ultrapassar em habitantes a cidade b, de " + cidadaos_b + " será necessário " + quantidade_anos + " anos.")
 	}
 }
 /* $$$ Portugol Studio $$$ 
