@@ -1,6 +1,36 @@
 programa
 {
-	funcao inteiro potenciacao(inteiro base, inteiro expoente) {
+	inclua biblioteca Texto
+	inclua biblioteca Util
+
+	funcao vazio espacos(inteiro quantidade_espacos) {
+		para (inteiro i = 0; i < quantidade_espacos; i++) {
+			escreva("=")
+		}
+		pular_linha()
+	}
+	
+	funcao vazio cabecalho(inteiro quantidade_espacos, cadeia enunciado) {
+		inteiro teste = 0
+		espacos(quantidade_espacos)
+		para (inteiro i = 0; i < quantidade_espacos / 2 - Texto.numero_caracteres(enunciado) / 2; i++) {
+			escreva(" ")
+		}
+		escreva(enunciado)
+		pular_linha()
+		espacos(quantidade_espacos)
+	}
+
+	funcao vazio pular_linha() {
+		escreva("\n")
+	}
+	
+	funcao vazio aguarde(inteiro tempo) {
+		escreva("...")
+		Util.aguarde(tempo)
+	}
+	
+	funcao inteiro potenciacao(inteiro base, inteiro expoente) {
 		inteiro i
 		inteiro resultado = 0
 		
@@ -9,11 +39,12 @@ programa
 				resultado = base
 			}
 			senao {
-				resultado = resultado * expoente
+				resultado = resultado * base
 			}
 		}
 		retorne resultado
 	}
+	
 	funcao inicio()
 	{
 		inteiro expoente
@@ -21,21 +52,24 @@ programa
 		inteiro i
 		inteiro resultado = 0
 
-		escreva("expoente: ")
+		cabecalho(40, "Exercício 4")
+		escreva("-> Entre com o expoente: ")
 		leia(expoente)
-		escreva("base: ")
+		escreva("-> Entre com a base: ")
 		leia(base)
 		para (i = 1; i <= expoente; i++) {
 			se (i == 1) {
 				resultado = base
 			}
 			senao {
-				resultado = resultado * expoente
+				resultado = resultado * base
 			}
 		}
-		escreva(resultado, " - ")
 
-		escreva(potenciacao(base, expoente))
+		aguarde(1000)
+		pular_linha()
+		
+		escreva("A potência será ", resultado, " ou ", potenciacao(base, expoente))
 	}
 }
 /* $$$ Portugol Studio $$$ 
