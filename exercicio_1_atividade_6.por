@@ -4,20 +4,26 @@ programa
 	inclua biblioteca Util
 
 	funcao vazio espacos(inteiro quantidade_espacos) {
+		// vai ser escrito "=" quantidade_espacos vezes
 		para (inteiro i = 0; i < quantidade_espacos; i++) {
 			escreva("=")
 		}
+		
 		pular_linha()
 	}
 	
 	funcao vazio cabecalho(inteiro quantidade_espacos, cadeia enunciado) {
 		inteiro teste = 0
 		espacos(quantidade_espacos)
+
+		// vai colocar espaço até que quando escrito o enunciado fique no meio
 		para (inteiro i = 0; i < quantidade_espacos / 2 - Texto.numero_caracteres(enunciado) / 2; i++) {
 			escreva(" ")
 		}
 		escreva(enunciado)
+		
 		pular_linha()
+		
 		espacos(quantidade_espacos)
 	}
 
