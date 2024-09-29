@@ -7,7 +7,7 @@ programa
 		para (inteiro i = 0; i < quantidade_espacos; i++) {
 			escreva("=")
 		}
-		escreva("\n")
+		pular_linha()
 	}
 	
 	funcao vazio cabecalho(inteiro quantidade_espacos, cadeia enunciado) {
@@ -16,8 +16,13 @@ programa
 		para (inteiro i = 0; i < quantidade_espacos / 2 - Texto.numero_caracteres(enunciado) / 2; i++) {
 			escreva(" ")
 		}
-		escreva(enunciado, "\n")
+		escreva(enunciado)
+		pular_linha()
 		espacos(quantidade_espacos)
+	}
+
+	funcao vazio pular_linha() {
+		escreva("\n")
 	}
 	
 	funcao vazio aguarde(inteiro tempo) {
@@ -45,7 +50,9 @@ programa
 			}
 		}
 		aguarde(2000)
-		escreva("\n", "O maior número encontrado foi: ", maior_numero)
+		pular_linha()
+		
+		escreva("O maior número encontrado foi: ", maior_numero)
 	}
 }
 /* $$$ Portugol Studio $$$ 
