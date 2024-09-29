@@ -73,7 +73,6 @@ programa
 		inteiro quantidade_anos = 0
 
 		// caprichos
-		cadeia eventualidade
 		logico aparecer_cidadaos
 
 		// inicio do programa
