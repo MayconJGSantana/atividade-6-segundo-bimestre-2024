@@ -27,7 +27,6 @@ programa {
 		espacos(quantidade_espacos)
 	}
 
-
 	funcao vazio pular_linha() {
 		escreva("\n")
 	}
